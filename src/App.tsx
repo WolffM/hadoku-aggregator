@@ -288,7 +288,7 @@ function AppInner(props: OssAggregatorProps & { containerRef: RefObject<HTMLDivE
       data-dark-theme={isDarkTheme ? 'true' : 'false'}
     >
       <div className="oss-aggregator">
-        <AppHeader title="OSS Recon Dashboard" />
+        <AppHeader title="OSS Issues" />
 
         <div className="oss-aggregator__actions">
           <button
