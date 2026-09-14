@@ -10,6 +10,37 @@
    color-scheme at all and their scrollbars and form controls rendered for the
    wrong mode. */
 
+/* Box model — SCOPED to this app's root, deliberately.
+ *
+ * Every `width: 100%` in this file is written as though padding and borders sit
+ * INSIDE the declared width. Nothing here ever said so, so the UA default
+ * (`content-box`) stood and those elements overhung their own containers by
+ * however much padding and border they carried. `.project-selector__search` was
+ * the visible one: `width: 100%` (332px) + `0.5rem 0.75rem` padding + a 1px
+ * border = 358px inside a 356px box, with `.project-selector { overflow: hidden }`
+ * cutting off the remainder. Not a mobile bug — it clipped at every width,
+ * desktop included.
+ *
+ * Why not `html { box-sizing: border-box }` + `* { box-sizing: inherit }`, the
+ * usual form: this stylesheet is bundled into @wolffm/hadoku-aggregator and
+ * injected into a HOST page, so a rule on `html` or a bare `*` is not ours to
+ * write — it would land on everything the host renders around us. And it would
+ * not even work: hadoku_site sets `.mf-viewport { box-sizing: content-box }` on
+ * the element it mounts child apps into, precisely so each app keeps the box
+ * model it was authored against, and `inherit` would pick that up instead.
+ *
+ * Scoping to the root and its descendants clears both problems at once. The
+ * descendant selectors are specificity (0,1,0) against the host's (0,0,0)
+ * `* { box-sizing: inherit }`, so this wins wherever the app is mounted without
+ * reaching a single element outside it.
+ */
+.oss-aggregator-container,
+.oss-aggregator-container *,
+.oss-aggregator-container *::before,
+.oss-aggregator-container *::after {
+  box-sizing: border-box;
+}
+
 /* Dark Reader detection helper */
 .oss-aggregator-container[data-dark-theme='true'] {
   --is-dark-theme: 1;
