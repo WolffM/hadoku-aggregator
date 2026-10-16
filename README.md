@@ -78,13 +78,13 @@ export default app
 
 ### Environment Variables
 
-| Variable            | Required | Description                                 |
-| ------------------- | -------- | ------------------------------------------- |
-| `CACHE_KV`          | Yes      | Cloudflare KV namespace binding             |
-| `SCRAPER_API_URL`   | Yes      | hadoku-scrape base URL for trigger calls    |
-| `SCRAPER_USER_KEY`  | Yes      | Service-tier key sent as `X-User-Key`       |
-| `GITHUB_TOKEN`      | Optional | GitHub PAT (legacy, used by marking system) |
-| `PHABRICATOR_TOKEN` | Optional | Phabricator API token (legacy)              |
+| Variable             | Required | Description                                 |
+| -------------------- | -------- | ------------------------------------------- |
+| `CACHE_KV`           | Yes      | Cloudflare KV namespace binding             |
+| `SCRAPER_API_URL`    | Yes      | hadoku-scrape base URL for trigger calls    |
+| `HADOKU_SERVICE_KEY` | Yes      | Service-tier key sent as `X-User-Key`       |
+| `GITHUB_TOKEN`       | Optional | GitHub PAT (legacy, used by marking system) |
+| `PHABRICATOR_TOKEN`  | Optional | Phabricator API token (legacy)              |
 
 ### API Endpoints
 

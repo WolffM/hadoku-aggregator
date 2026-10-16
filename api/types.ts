@@ -27,7 +27,7 @@ export interface OSSEnv {
    * OSS_SCRAPER_KEY via `python scripts/administration.py cloudflare-secrets
    * oss-recon-api`.
    */
-  SCRAPER_USER_KEY?: string
+  HADOKU_SERVICE_KEY?: string
   /**
    * Shared secret proving a request arrived via edge-router. createEdgeAuth
    * trusts the edge-stamped X-Hadoku-Tier only when X-Edge-Auth matches this;
