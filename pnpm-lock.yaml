@@ -55,8 +55,8 @@ importers:
         specifier: ^5.1.2
         version: 5.1.2(vite@7.3.1(yaml@2.8.2))
       '@wolffm/catalogue':
-        specifier: ^1.0.4
-        version: 1.0.4
+        specifier: ^1.0.5
+        version: 1.0.5
       '@wolffm/task-ui-components':
         specifier: ^4.14.0
         version: 4.14.0(@wolffm/themes@5.12.0(react@19.2.4))(react@19.2.4)
@@ -782,8 +782,8 @@ packages:
   '@vitest/utils@4.0.18':
     resolution: {integrity: sha512-msMRKLMVLWygpK3u2Hybgi4MNjcYJvwTb0Ru09+fOyCXIgT5raYP041DRRdiJiI3k/2U6SEbAETB3YtBrUkCFA==}
 
-  '@wolffm/catalogue@1.0.4':
-    resolution: {integrity: sha512-fN/P+0DHPnf2wnI8je+DoEGEYO1+zH4k4JkyiT2pwuSU5w/yry5gUt1mYVTbSuF58/l2C4KUUzAy3OimIQ7OOQ==, tarball: https://npm.pkg.github.com/download/@wolffm/catalogue/1.0.4/827b40751bc8325e2d7049ee367333579ebb5652}
+  '@wolffm/catalogue@1.0.5':
+    resolution: {integrity: sha512-Q6sh6VywX+aXbAunlXvkEHOxkVsneU5QGq/5cvQb2coYsEeLI9FC6l1bM4KaWaTpZOVTtx3DnnvTCVsvEVthFQ==, tarball: https://npm.pkg.github.com/download/@wolffm/catalogue/1.0.5/9fca09ef5d70d0fafc70918ffd66117da91a1c77}
     engines: {node: '>=18'}
 
   '@wolffm/logger@1.4.0':
@@ -2502,7 +2502,7 @@ snapshots:
       '@vitest/pretty-format': 4.0.18
       tinyrainbow: 3.0.3
 
-  '@wolffm/catalogue@1.0.4': {}
+  '@wolffm/catalogue@1.0.5': {}
 
   '@wolffm/logger@1.4.0': {}
 
