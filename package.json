@@ -43,9 +43,9 @@
   },
   "dependencies": {
     "@hono/zod-openapi": "^1.1.5",
-    "@wolffm/logger": "^1.4.2",
+    "@wolffm/logger": "^1.4.3",
     "@wolffm/prefs-client": "^1.1.1",
-    "@wolffm/worker-utils": "^1.6.17",
+    "@wolffm/worker-utils": "^1.6.18",
     "hono": "^4.11.4",
     "marked": "^17.0.3",
     "zod": "^4.1.13"
