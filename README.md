@@ -143,12 +143,11 @@ vibedispatch (UI + orchestration)
 
 ## Versioning
 
-This package uses automatic versioning with dual safeguards:
-
-1. **Pre-commit Hook** (Primary): Bumps patch version when code changes are committed
-2. **Workflow Check** (Safety Net): Checks registry and bumps if version exists
-
-Version format: `major.minor.patch` with automatic rollover at `.20`.
+The version is CI's, never a commit's. Nobody edits it by hand and no hook
+bumps it: the publish workflow's `Version` step (`WolffM/hadoku-actions/next-version`)
+sets it to one patch above the registry's newest, in the CI workspace only, and
+nothing is committed back. A committed version above the registry is kept, so a
+deliberate major/minor bump stays possible.
 
 ## License
 

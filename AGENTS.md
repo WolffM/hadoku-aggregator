@@ -40,8 +40,11 @@ hadoku-scrape → Cloudflare KV (recon:{slug})
 
 ## Versioning
 
-Pre-commit hook auto-bumps patch version on code changes (rollover at .20).
-Publish workflow double-checks registry and bumps if needed. Never manually edit version.
+The version is CI's, never a commit's. Never edit it, and no hook bumps it: the publish
+workflow's `Version` step (`WolffM/hadoku-actions/next-version`)
+sets it to one patch above the registry's newest, in the CI workspace only, and
+nothing is committed back. A committed version above the registry is kept, so a
+deliberate major/minor bump stays possible.
 
 ## This repo does NOT
 
