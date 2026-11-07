@@ -54,6 +54,11 @@ describe('tier hierarchy at the write gate', () => {
     expect(res.status).toBe(403)
   })
 
+  it('blocks member — it ranks above public but still below friend', async () => {
+    const res = await request(asTier('member'))
+    expect(res.status).toBe(403)
+  })
+
   it('blocks an unknown tier — no rank means no access', async () => {
     // Guards the fallback in tierAtLeast: a userType outside the hierarchy has
     // rank -1, so it must never satisfy even the lowest gate.
