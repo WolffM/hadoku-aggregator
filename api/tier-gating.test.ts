@@ -1,12 +1,15 @@
 /**
  * Tier-hierarchy smoke test for the OSS Issues API gate.
  *
- * The platform gates on RANK — public < friend < service < admin — so a route
- * gated at `friend` must admit friend, service, and admin. This is the property
- * that used to break: the gate was an allowlist (`['admin','friend','service']`)
- * and every new caller tier had to be remembered and added by hand. Here we
- * assert the rank behaviour directly, so a regression to exact-match gating
- * fails the build instead of silently 403ing a legitimate higher-tier caller.
+ * The platform gates on RANK — public < member < friend < service < wife <
+ * admin — so a route gated at `friend` must admit friend, service, wife, and
+ * admin, and refuse public and member. This is the property that used to
+ * break: the gate was an allowlist (`['admin','friend','service']`) and every
+ * new caller tier had to be remembered and added by hand. Here we assert the
+ * rank behaviour directly, by looping over the platform's own `TIER_RANK`
+ * rather than a hand-typed tier list, so a regression to exact-match gating
+ * fails the build instead of silently 403ing a legitimate higher-tier caller,
+ * and a tier added to the ladder later is covered with no edit here.
  *
  * Auth arrives the way it does in production: edge-router stamps
  * `X-Hadoku-Tier` and proves provenance with `X-Edge-Auth` (createEdgeAuth
@@ -15,6 +18,7 @@
  */
 
 import { describe, it, expect } from 'vitest'
+import { TIER_RANK } from '@wolffm/worker-utils'
 import { createOSSHandler } from './handler'
 
 const EDGE_SECRET = 'test-edge-auth-secret'
@@ -42,21 +46,16 @@ function asTier(tier: string) {
 }
 
 describe('tier hierarchy at the write gate', () => {
-  it('admits every tier at or above friend', async () => {
-    for (const tier of ['friend', 'service', 'wife', 'admin']) {
+  it('admits every tier at or above friend, blocks every tier below it', async () => {
+    // Derived from the platform's own TIER_RANK rather than a hand-typed tier
+    // list, so a tier added above or below the floor is covered without
+    // anyone editing this loop. member (rank 1) must stay below friend (rank
+    // 2) on its own merits, not because it was forgotten.
+    for (const tier of Object.keys(TIER_RANK)) {
       const res = await request(asTier(tier))
-      expect(res.status, `${tier} must reach a friend-gated route`).not.toBe(403)
+      const wantBlocked = TIER_RANK[tier as keyof typeof TIER_RANK] < TIER_RANK.friend
+      expect(res.status === 403, tier).toBe(wantBlocked)
     }
-  })
-
-  it('blocks public', async () => {
-    const res = await request(asTier('public'))
-    expect(res.status).toBe(403)
-  })
-
-  it('blocks member — it ranks above public but still below friend', async () => {
-    const res = await request(asTier('member'))
-    expect(res.status).toBe(403)
   })
 
   it('blocks an unknown tier — no rank means no access', async () => {
