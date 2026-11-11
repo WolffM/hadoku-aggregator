@@ -45,7 +45,7 @@
     "@hono/zod-openapi": "^1.1.5",
     "@wolffm/logger": "^1.4.4",
     "@wolffm/prefs-client": "^1.1.25",
-    "@wolffm/worker-utils": "^1.7.20",
+    "@wolffm/worker-utils": "^1.7.21",
     "hono": "^4.11.4",
     "marked": "^17.0.3",
     "zod": "^4.1.13"
@@ -68,7 +68,7 @@
     "@vitejs/plugin-react": "^5.1.2",
     "@wolffm/catalogue": "^1.0.13",
     "@wolffm/task-ui-components": "^4.23.31",
-    "@wolffm/themes": "^5.13.46",
+    "@wolffm/themes": "^5.14.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.4.0",
