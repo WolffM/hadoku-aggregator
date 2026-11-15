@@ -18,8 +18,8 @@ importers:
         specifier: ^1.1.27
         version: 1.1.27(react@19.2.4)(zod@4.3.6)
       '@wolffm/worker-utils':
-        specifier: ^1.7.23
-        version: 1.7.23(hono@4.11.7)(zod@4.3.6)
+        specifier: ^1.7.24
+        version: 1.7.24(hono@4.11.7)(zod@4.3.6)
       hono:
         specifier: ^4.11.4
         version: 4.11.7
@@ -55,8 +55,8 @@ importers:
         specifier: ^5.1.2
         version: 5.1.2(vite@7.3.1(yaml@2.8.2))
       '@wolffm/catalogue':
-        specifier: ^1.0.13
-        version: 1.0.13
+        specifier: ^1.0.14
+        version: 1.0.14
       '@wolffm/task-ui-components':
         specifier: ^4.23.35
         version: 4.23.35(@wolffm/themes@5.14.4(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -782,8 +782,8 @@ packages:
   '@vitest/utils@4.0.18':
     resolution: {integrity: sha512-msMRKLMVLWygpK3u2Hybgi4MNjcYJvwTb0Ru09+fOyCXIgT5raYP041DRRdiJiI3k/2U6SEbAETB3YtBrUkCFA==}
 
-  '@wolffm/catalogue@1.0.13':
-    resolution: {integrity: sha512-Gn3opkqmke2K1i+MkErtqTtBDsOMFvcYIVOQwPnkA01hzdDhjC/ubqHyGhUgDVBNUmfHXotvPsuKryDZa65ESQ==, tarball: https://npm.pkg.github.com/download/@wolffm/catalogue/1.0.13/c4a5c017c5c27094bcffeba7a94af2a96f4ea354}
+  '@wolffm/catalogue@1.0.14':
+    resolution: {integrity: sha512-wQqX5+JgS1QPWr78TloYREJmGOHhWqTtDgfS1/NPR2ASTLdyOKn2MUtoyXi2Q0oUWOCGpJ2i5YDd9Ger8NQSQQ==, tarball: https://npm.pkg.github.com/download/@wolffm/catalogue/1.0.14/8c951b626281c08099367641528aeb90a9c3efbc}
     engines: {node: '>=18'}
 
   '@wolffm/logger@1.4.4':
@@ -810,8 +810,8 @@ packages:
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
-  '@wolffm/worker-utils@1.7.23':
-    resolution: {integrity: sha512-LY1bkXYXSezPt27YZHFnnCVgavYpya/SN3+S0DLVtLoN3BKC7rHRRQwD1y/oPZc2U8IdbUol6eMGFfyWjQsVWQ==, tarball: https://npm.pkg.github.com/download/@wolffm/worker-utils/1.7.23/720d078c8998bb986ebafec82d2839790bd7183d}
+  '@wolffm/worker-utils@1.7.24':
+    resolution: {integrity: sha512-ZEHhUz79YLpEb1wZqCA7CD7PG44VdF7y0hD92imaB89qsPxFrcbv6KpyGHeQmUPiZfHOXUhMjOM1rltVbqYpPA==, tarball: https://npm.pkg.github.com/download/@wolffm/worker-utils/1.7.24/f69f1a6e71d07baabbccadad92e54bd0c9f8e854}
     peerDependencies:
       hono: ^4.11.4
 
@@ -2501,7 +2501,7 @@ snapshots:
       '@vitest/pretty-format': 4.0.18
       tinyrainbow: 3.0.3
 
-  '@wolffm/catalogue@1.0.13': {}
+  '@wolffm/catalogue@1.0.14': {}
 
   '@wolffm/logger@1.4.4': {}
 
@@ -2522,7 +2522,7 @@ snapshots:
       react: 19.2.4
       zod: 4.3.6
 
-  '@wolffm/worker-utils@1.7.23(hono@4.11.7)(zod@4.3.6)':
+  '@wolffm/worker-utils@1.7.24(hono@4.11.7)(zod@4.3.6)':
     dependencies:
       '@hono/zod-openapi': 1.2.0(hono@4.11.7)(zod@4.3.6)
       '@wolffm/logger': 1.4.4
