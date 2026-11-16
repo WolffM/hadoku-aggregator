@@ -12,16 +12,17 @@ first name, before it became this repo's current one.
 
 Within three weeks the dashboard became the scoring pipeline it is today. On
 2026-02-20, a KV reader, a watchlist and claim tracking arrived
-(`5925bb9`), and the whole analysis engine — repo health scoring, the
+(`5925bb9`). The whole analysis engine — repo health scoring, the
 Contribution Viability Score, lifecycle classification and sentiment
 analysis — landed in a single commit the same day (`e0ba48f`), followed
 hours later by quirk detection and the dossier compiler (`e3ad76c`). Two days
 after that the UI was redesigned around it as a "recon intelligence
-dashboard" (`88df33c`, 2026-02-22). By 2026-02-26 the old hardcoded project
-list and its legacy data path were gone, replaced by projects discovered
-dynamically from what the scraper had written to KV (`92037f1`, `8ce6f0f`),
-and a pre-computation pipeline moved the heaviest scoring work off the
-Cloudflare Worker's own request path (`1dc2965`, 2026-02-24).
+dashboard" (`88df33c`, 2026-02-22). Two days later, a pre-computation
+pipeline moved the heaviest scoring work off the Cloudflare Worker's own
+request path (`1dc2965`, 2026-02-24). By 2026-02-26 the old hardcoded
+project list and its legacy data path were gone too, replaced by projects
+discovered dynamically from what the scraper had written to KV (`92037f1`,
+`8ce6f0f`).
 
 ## The v3 pipeline and growing up (April–August 2026)
 

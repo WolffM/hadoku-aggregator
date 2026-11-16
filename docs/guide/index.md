@@ -2,20 +2,19 @@
 title: OSS Issue Aggregator
 summary: >-
   Scores open-source issues for how likely they are to turn into a merged
-  pull request, live at [hadoku.me/aggregator](https://hadoku.me/aggregator).
-  It reads repo and issue data a companion scraping service has already
-  collected, scores each issue's viability and each repo's health, compiles a
-  contribution dossier per repo, and serves all of it as a plain API so other
-  tools (such as vibedispatch) can act on it without the page.
+  pull request, reading data a companion scraping service has already
+  collected and serving the scores, repo health and a contribution dossier
+  for each repo as a page and a plain API, live at
+  [hadoku.me/aggregator](https://hadoku.me/aggregator).
 features:
   - name: Browsing scored issues
-    summary: 'A table or card board of open-source issues, ranked by how likely a contribution is to land.'
+    summary: 'Shows open issues as a table or a card board, ranked by how likely a contribution is to land.'
     anchor: browsing-scored-issues
   - name: Repo health
-    summary: 'Maintainer activity, how easy a merge is, and whether a repo looks abandoned.'
+    summary: 'Shows maintainer activity, how easy a merge is, and whether a repo looks abandoned.'
     anchor: repo-health
   - name: Contribution dossiers
-    summary: 'A compiled, six-section guide to contributing to one repo.'
+    summary: 'Compiles a six-section guide to contributing to one repo.'
     anchor: contribution-dossiers
   - name: Claiming an issue
     summary: 'Mark an issue as being worked, so two people or agents do not duplicate it.'
@@ -45,6 +44,8 @@ open-source issues worth assigning a contributor to, live at
 service collects issue, pull-request and repo data from the forges it
 watches; this repo reads that data, scores it, and serves the result — to its
 own page, and to any other tool that calls its API.
+
+![The OSS Issues board: open issues across watched repos, ranked by Contribution Viability Score (CVS), each with a lifecycle tag and complexity](images/board.webp)
 
 Scoring combines a repo's health (is it maintained, is a merge realistic),
 an issue's own signals (freshness, activity, how clear it is, how much

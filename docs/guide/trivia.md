@@ -20,7 +20,7 @@ Each fact names the commit it comes from.
   `CODEOWNERS` and labels — shipped under the internal codename
   "crimson-kitty" (`199b867`).
 - **A list that forgot things.** The write-access gate used to be a
-  hand-typed allowlist of tiers; it was rewritten to check a tier's rank on
+  hand-typed allowlist of tiers. It was rewritten to check a tier's rank on
   the platform's own ladder instead, so a tier added above friend later
   needs no one to remember to add it here (`7727156`).
 - **Two first commits.** The repo's very first commit is titled "first
@@ -30,7 +30,7 @@ Each fact names the commit it comes from.
   (`37a68fd`).
 - **CI ran no tests at all, for most of this repo's history.** Only
   typecheck and lint ran on a pull request; the 423 tests under `api/`
-  never executed in CI, which is how one of them kept passing locally while
+  never executed in CI. That is how one of them kept passing locally while
   depending on fixture files excluded by `.gitignore` — it could only ever
   pass on the machine that happened to have them. One commit turned
   typechecking and testing of `api/` on together, fixing the 303 type errors

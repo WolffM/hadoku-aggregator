@@ -25,11 +25,13 @@ E2E (`npx playwright test`) runs against the real production site,
 
 ## Architecture
 
-```
-scraper (private, cron) ──► Cloudflare KV ◄── this repo reads + scores ──► API ──► vibedispatch
-                               recon:{slug}            reads scraper data,        reads scored
-                               (scraper-written)        writes its own KV          data over HTTP
-                                                         keys, serves both
+```mermaid
+flowchart LR
+    scraper["Scraper service<br/>(private, cron)"] -->|writes recon:slug| kv[("Cloudflare KV")]
+    kv -->|reads scraper data| this["This repo:<br/>scores + serves"]
+    this -->|writes recon:slug:health etc.| kv
+    this --> api["API, /aggregator/api/recon/..."]
+    api -->|scored data over HTTP| vibedispatch["vibedispatch"]
 ```
 
 - `src/` — the React UI (`src/entry.tsx` exports `mount(el)` / `unmount(el)`),
@@ -68,21 +70,21 @@ pnpm test        # vitest over api/, including api/tier-gating.test.ts
   stylelint, re-staging whatever it auto-fixed.
 - **CI** (`ci.yml`) runs typecheck and lint on pull requests and pushes to
   `main`. For most of this repo's life CI ran neither test nor typechecked
-  `api/` at all; a single commit turned both on, fixing the 303 type errors
+  `api/` at all. A single commit turned both on, fixing the 303 type errors
   that had built up unseen in `api/` and adding the step that finally runs
   the suite in CI (`e603aa5`) — see [trivia.md](trivia.md) for what that step
   found.
-- **`api/tier-gating.test.ts`** is a smoke test for the write gate: it loops
+- **`api/tier-gating.test.ts`** is a smoke test for the write gate. It loops
   over every tier the platform defines and asserts the gate blocks exactly
-  the ones ranked below `friend` — so a tier added to the platform's ladder
+  the ones ranked below `friend`, so a tier added to the platform's ladder
   later is covered without anyone editing this test.
 
 ## How it deploys
 
-A push to `main` that changes the package runs `publish.yml`: the version is
+A push to `main` that changes the package runs `publish.yml`. The version is
 set at publish time, one patch above the registry's newest (never a
 committed number — a committed version _above_ the registry's is the one way
-to force a deliberate bump), the package is built and published as
+to force a deliberate bump). The package is built and published as
 `@wolffm/hadoku-aggregator`, and the platform's site repo is notified
 (`packages_updated`) so it can pick up the new version. This repo has no
 deploy step of its own: putting the published package live, as the Worker
