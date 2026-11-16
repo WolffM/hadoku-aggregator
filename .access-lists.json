@@ -1,0 +1,4 @@
+{
+  "//": "Edge access lists this repo's service identity asks to be on: list id -> the one reason. The operator grants each on hadoku_site's command-station -> Service grants; nothing grants it automatically (hadoku_site docs/operations/SECRETS.md, 'How a repo asks for an edge access list').",
+  "scraper-service": "The recon worker triggers the scraper's oss-recon scrape (POST /api/v1/oss-recon/scrape, api/recon/triggers.ts)"
+}
