@@ -31,8 +31,15 @@ a merge realistically is, contributor availability, and a "kill signal" flag
 for a repo that looks abandoned. The viability score is colored green at 70
 and above, amber from 40, and red below that.
 
+Health also folds in **quirk detection**. A repo's `CONTRIBUTING.md` and
+merged-PR history are scanned for a changeset requirement, a CLA, a
+conventional-commits rule, or an off-default target branch. Each quirk is
+flagged with its evidence and whether it blocks a contribution outright or
+is just something to know (`api/recon/quirks.ts`).
+
 **How to use it.** Open an issue's repo panel from the board, or the health
-summary beside a project in the selector.
+summary beside a project in the selector; a detected quirk shows there and
+in the issue's dossier (see [Contribution dossiers](#contribution-dossiers)).
 
 **What it does not do.** Health is computed from what the scraper has
 collected as of its last pass — it is not a live check of the repo at the
@@ -50,7 +57,8 @@ across the top switch sections.
 
 **What it does not do.** A dossier is a read-only compiled summary — it is
 not a place to draft or submit a contribution; that happens on the forge
-itself (or through vibedispatch's own fork/PR flow).
+itself (or through [hadoku-tenhands](https://github.com/WolffM/hadoku-tenhands)'s
+own fork/PR flow).
 
 ## Claiming an issue
 
@@ -63,13 +71,13 @@ or two agents — from duplicating the same issue. A claim with no progress for
 else believing it is still being worked.
 
 **How to use it.** Open an issue's detail drawer and press **Claim Issue**.
-vibedispatch calls the same claim endpoint itself once it forks a repo to
-work an issue, so a claim you see may have come from there rather than the
-page.
+hadoku-tenhands calls the same claim endpoint itself once it forks a repo
+to work an issue, so a claim you see may have come from there rather than
+the page.
 
 **What it does not do.** A claim is a courtesy flag, not a lock: nothing in
-the API stops a second claim, and nothing here forks the repo or opens a pull
-request — that is vibedispatch's job, not this one's.
+the API stops a second claim, and nothing here forks the repo or opens a
+pull request — that is hadoku-tenhands's job, not this one's.
 
 ## Picking which repos to watch
 
@@ -100,9 +108,10 @@ already written.
 ## The recon API
 
 **What it does.** Every score, health check and dossier the page shows is
-also a plain HTTP endpoint under `/aggregator/api/recon/...` (and documented
-in an OpenAPI spec at `/openapi.json`), so another tool — today,
-vibedispatch — can read the same data without the UI.
+also a plain HTTP endpoint under `/aggregator/api/recon/...`, documented in
+an OpenAPI spec at `/openapi.json`. Another tool — today,
+[hadoku-tenhands](https://github.com/WolffM/hadoku-tenhands) — can read the
+same data without the UI.
 
 **How to use it.** `GET /recon/{slug}/scored-issues`, `/health` and
 `/dossier` for one repo, or `/recon/all-scored-issues` across every repo the
@@ -112,6 +121,19 @@ full endpoint list.
 **What it does not do.** Reads need no key; anything that writes (a claim, or
 a trigger to rescrape or recompute) needs friend tier and up, the same as the
 page.
+
+## Theming and layout
+
+**What it does.** The board ships with every theme the platform's shared
+`@wolffm/themes` package defines, light and dark variants of each family,
+and lays out the same on a phone as on a desktop.
+
+**How to use it.** Pick a theme from the picker in the header; nothing
+about the board itself needs configuring for a smaller screen.
+
+**What it does not do.** This repo defines no theme of its own — it only
+consumes the shared token set, so a new theme added to the platform shows
+up here automatically.
 
 ## Trivia
 

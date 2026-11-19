@@ -4,22 +4,15 @@
 
 > Intelligence + API layer for the OSS contribution pipeline
 
-Scores open source issues for contribution viability, analyzes repo health, and compiles contribution dossiers. Part of the hadoku pipeline: **hadoku-scrape** (data collection) → **hadoku-aggregator** (analysis + API) → **vibedispatch** (orchestration + UI).
+Scores open source issues for contribution viability, analyzes repo health, and compiles contribution dossiers. Part of a small pipeline: a private scraping service (data collection) → **hadoku-aggregator** (this repo: analysis + API) → [hadoku-tenhands](https://github.com/WolffM/hadoku-tenhands) (fork/PR orchestration + UI).
 
 **Live at:** [hadoku.me/aggregator](https://hadoku.me/aggregator)
 
 ## Features
 
-- **Recon Pipeline**: Scores issues using CVS (Contribution Viability Score) combining repo health, issue quality, and timing signals
-- **Repo Health Analysis**: Maintainer activity, merge accessibility, contributor availability, kill signal detection
-- **Dossier Compilation**: 6-section markdown contribution guides per repo (overview, rules, success patterns, anti-patterns, issue board, setup)
-- **Dynamic Discovery**: Projects discovered automatically from KV — no hardcoded project lists
-- **Multi-Platform**: GitHub, GitLab, Gitea, Phabricator, Bugzilla, and Trac
-- **Issue Lifecycle**: Classifies issues as fresh, triaged, accepted, stale, or zombie
-- **Sentiment Analysis**: Pattern-matched comment sentiment scoring
-- **Quirk Detection**: Identifies changesets, CLA, conventional commits, branch targeting requirements
-- **Beautiful Themes**: 16 light/dark theme options
-- **Responsive Design**: Works on desktop and mobile
+What each part does and how to use it — scoring, repo health and quirk
+detection, dossiers, issue claiming, multi-platform support, and theming —
+is in [docs/guide/features.md](docs/guide/features.md).
 
 ## Package Exports
 
@@ -34,36 +27,8 @@ import '@wolffm/hadoku-aggregator/style.css'
 import { createOSSHandler, type OSSEnv } from '@wolffm/hadoku-aggregator/api'
 ```
 
-## Development
-
-```bash
-# Install dependencies
-pnpm install
-
-# Start dev server
-pnpm dev
-
-# Build (UI + API)
-pnpm build
-
-# Run tests
-pnpm test
-
-# Lint
-pnpm lint
-```
-
-### Build Output
-
-The build produces:
-
-```
-dist/
-├── index.js          # UI bundle (React components)
-├── style.css         # UI styles
-└── api/
-    └── index.js      # API bundle (Hono handler)
-```
+Running it locally, the build and the dist/ output layout are in
+[contributing.md](docs/guide/contributing.md).
 
 ## API Usage
 
@@ -80,13 +45,13 @@ export default app
 
 ### Environment Variables
 
-| Variable             | Required | Description                                 |
-| -------------------- | -------- | ------------------------------------------- |
-| `CACHE_KV`           | Yes      | Cloudflare KV namespace binding             |
-| `SCRAPER_API_URL`    | Yes      | hadoku-scrape base URL for trigger calls    |
-| `HADOKU_SERVICE_KEY` | Yes      | Service-tier key sent as `X-User-Key`       |
-| `GITHUB_TOKEN`       | Optional | GitHub PAT (legacy, used by marking system) |
-| `PHABRICATOR_TOKEN`  | Optional | Phabricator API token (legacy)              |
+| Variable             | Required | Description                                                   |
+| -------------------- | -------- | ------------------------------------------------------------- |
+| `CACHE_KV`           | Yes      | Cloudflare KV namespace binding                               |
+| `SCRAPER_API_URL`    | Yes      | base URL of the (private) scraping service, for trigger calls |
+| `HADOKU_SERVICE_KEY` | Yes      | Service-tier key sent as `X-User-Key`                         |
+| `GITHUB_TOKEN`       | Optional | GitHub PAT (legacy, used by marking system)                   |
+| `PHABRICATOR_TOKEN`  | Optional | Phabricator API token (legacy)                                |
 
 ### API Endpoints
 
@@ -126,7 +91,7 @@ All paths are relative to the base path (e.g., `/oss/api`).
 ## Data Flow
 
 ```
-hadoku-scrape (cron)
+Scraping service, private (cron)
   │  fetches from upstream APIs
   │  writes consolidated data to KV
   ▼
@@ -140,16 +105,13 @@ Cloudflare KV
 hadoku-aggregator API (this repo)
   │  reads scraper data, runs analysis, serves results
   ▼
-vibedispatch (UI + orchestration)
+hadoku-tenhands (UI + fork/PR workflow)
 ```
 
-## Versioning
+## Versioning and deployment
 
-The version is CI's, never a commit's. Nobody edits it by hand and no hook
-bumps it: the publish workflow's `Version` step (`WolffM/hadoku-actions/next-version`)
-sets it to one patch above the registry's newest, in the CI workspace only, and
-nothing is committed back. A committed version above the registry is kept, so a
-deliberate major/minor bump stays possible.
+See [contributing.md](docs/guide/contributing.md#how-it-deploys): the
+version is CI's, never a commit's.
 
 ## License
 

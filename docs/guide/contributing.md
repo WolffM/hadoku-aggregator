@@ -31,7 +31,7 @@ flowchart LR
     kv -->|reads scraper data| this["This repo:<br/>scores + serves"]
     this -->|writes recon:slug:health etc.| kv
     this --> api["API, /aggregator/api/recon/..."]
-    api -->|scored data over HTTP| vibedispatch["vibedispatch"]
+    api -->|scored data over HTTP| tenhands["hadoku-tenhands"]
 ```
 
 - `src/` — the React UI (`src/entry.tsx` exports `mount(el)` / `unmount(el)`),
