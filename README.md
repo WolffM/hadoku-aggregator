@@ -1,5 +1,7 @@
 # OSS Issue Aggregator
 
+**Guide:** [overview](docs/guide/index.md) · [features](docs/guide/features.md) · [contributing](docs/guide/contributing.md) · [history](docs/guide/history.md) · [trivia](docs/guide/trivia.md)
+
 > Intelligence + API layer for the OSS contribution pipeline
 
 Scores open source issues for contribution viability, analyzes repo health, and compiles contribution dossiers. Part of the hadoku pipeline: **hadoku-scrape** (data collection) → **hadoku-aggregator** (analysis + API) → **vibedispatch** (orchestration + UI).
