@@ -95,8 +95,21 @@ jobs:
       # could only ever pass on the machine that happened to have them, and CI
       # never noticed because CI never ran it. The fixtures are committed now.
       - name: Test
+        id: test
         if: steps.scope.outputs.run == 'true'
         run: pnpm test
+
+      # Every test into the fleet test store (hadoku_site
+      # docs/planning/unified-test-reporting-2026-11-23.md), red runs too.
+      # Skipped with the suite when the diff touched nothing testable.
+      # Advisory: it never fails the job, which the test step already does.
+      - name: Report the tests
+        if: always() && steps.test.outcome != 'skipped'
+        uses: WolffM/hadoku-actions/report-tests@v1
+        with:
+          suite: unit
+          reports: vitest reports/vitest.json
+          key: ${{ secrets.KEY_SERVICE_AGGREGATOR }}
 
   lint:
     name: lint

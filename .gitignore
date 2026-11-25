@@ -29,6 +29,8 @@ pnpm-debug.log*
 
 # Testing
 coverage/
+# vitest's JSON report, read by CI's report-tests step.
+reports/
 .nyc_output/
 # NOT api/recon/__tests__/fixtures/ — those are COMMITTED.
 # They are a hand-captured snapshot of public GitHub data for fastify/fastify

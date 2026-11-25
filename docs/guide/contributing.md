@@ -73,7 +73,9 @@ pnpm test        # vitest over api/, including api/tier-gating.test.ts
   `api/` at all. A single commit turned both on, fixing the 303 type errors
   that had built up unseen in `api/` and adding the step that finally runs
   the suite in CI (`e603aa5`) — see [trivia.md](trivia.md) for what that step
-  found.
+  found. The job then posts every test's outcome (vitest's JSON report,
+  `reports/vitest.json`) to the fleet test store with `report-tests`, red
+  runs included.
 - **`api/tier-gating.test.ts`** is a smoke test for the write gate. It loops
   over every tier the platform defines and asserts the gate blocks exactly
   the ones ranked below `friend`, so a tier added to the platform's ladder
